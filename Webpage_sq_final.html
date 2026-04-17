@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Koh Yi Tong | TCG Player Portfolio</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: #f5f7fb;
+      line-height: 1.6;
+      background: radial-gradient(circle at top right, rgba(74, 144, 226, 0.15), transparent 30%),
+                  radial-gradient(circle at bottom left, rgba(152, 84, 255, 0.12), transparent 30%),
+                  #0b1226;
+    
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 8%;
+      background: rgba(11, 18, 38, 0.85);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      font-weight: bold;
+      font-size: 1.4rem;
+      color: #ffffff;
+      letter-spacing: 2px;
+    }
+
+    
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      font-size: 0.95rem;
+      color: #d4dbeb;
+    }
+
+    .nav-links a:hover {
+      color: #ffffff;
+    }
+
+    section {
+      min-height: 100vh;
+      padding: 90px 8% 70px;
+      display: flex;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    section:not(.hero)::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(rgba(8, 14, 30, 0.92), rgba(8, 14, 30, 0.94)),
+                  url('assets/images/6246665122264845942.jpg') center/cover fixed no-repeat;
+      opacity: 0.32;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .hero {
+      min-height: auto;
+      padding: 0;
+      display: block;
+      position: relative;
+    }
+
+    .hero-banner {
+      position: relative;
+      min-height: 72vh;
+      padding: 120px 8% 140px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    /* Blurred background layer */
+    .hero-banner::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url('assets/images/6246665122264845943.jpg') center/cover no-repeat;
+      /* blur removed */
+      z-index: 0;
+    }
+
+    /* Color overlays on top of blurred bg */
+    .hero-banner::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(rgba(5, 10, 24, 0.55), rgba(5, 10, 24, 0.72)),
+                  radial-gradient(circle at top right, rgba(74, 144, 226, 0.2), transparent 30%),
+                  radial-gradient(circle at bottom left, rgba(152, 84, 255, 0.16), transparent 30%);
+      z-index: 1;
+    }
+
+    .hero-inner {
+      width: 100%;
+      display: block;
+    }
+
+    .hero-content {
+      max-width: 860px;
+      position: relative;
+      z-index: 2; /* above overlays */
+    }
+
+    .hero-profile-wrap {
+      position: relative;
+      margin-top: -86px;
+      padding: 0 8%;
+      z-index: 5;
+    }
+
+    .hero-profile-card {
+      display: flex;
+      align-items: flex-end;
+      gap: 28px;
+      flex-wrap: wrap;
+    }
+
+    .profile-image-large {
+      width: 180px;
+      height: 180px;
+      border-radius: 20px; /* rounded square */
+      border: 3px solid rgba(127, 208, 255, 0.4);
+      box-shadow: 0 0 12px rgba(127, 208, 255, 0.6),
+                  0 0 30px rgba(152, 84, 255, 0.4),
+                  0 12px 30px rgba(0,0,0,0.25);
+      overflow: hidden;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .profile-image-large::before {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      border-radius: 22px;
+      background: linear-gradient(45deg, #7fd0ff, #9854ff, #7fd0ff);
+      z-index: -1;
+      filter: blur(8px);
+      opacity: 0.6;
+    }
+
+    
+      flex-shrink: 0;
+    }
+
+    .hero-profile-info {
+      padding-bottom: 14px;
+      max-width: 720px;
+    }
+
+    .hero-profile-info h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-bottom: 8px;
+      color: #ffffff;
+    }
+
+    .hero-profile-info p {
+      color: #d4dbeb;
+      font-size: 1rem;
+      margin: 0;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 8px 14px;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 999px;
+      font-size: 0.85rem;
+      color: #c7d2ea;
+      margin-bottom: 20px;
+      background: rgba(255,255,255,0.04);
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      line-height: 1.1;
+      margin-bottom: 18px;
+    }
+
+    .highlight {
+      color: #7fd0ff;
+    }
+
+    .hero p {
+      max-width: 650px;
+      color: #dce4f5;
+      font-size: 1.05rem;
+      margin-bottom: 28px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 13px 22px;
+      border-radius: 12px;
+      font-weight: bold;
+      transition: 0.25s ease;
+      display: inline-block;
+    }
+
+    .btn-primary {
+      background: #7fd0ff;
+      color: #08101f;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      background: #a6e0ff;
+    }
+
+    .btn-secondary {
+      border: 1px solid rgba(255,255,255,0.18);
+      color: #f5f7fb;
+      background: rgba(255,255,255,0.04);
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-2px);
+      background: rgba(255,255,255,0.08);
+    }
+
+    .section-wrap {
+      width: 100%;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      margin-bottom: 14px;
+    }
+
+    .section-subtitle {
+      color: #c7d2ea;
+      max-width: 720px;
+      margin-bottom: 36px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 22px;
+      width: 100%;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 24px;
+      transition: 0.25s ease;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.18);
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      background: rgba(255,255,255,0.08);
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+      color: #ffffff;
+    }
+
+    .card p {
+      color: #d4dbeb;
+      font-size: 0.96rem;
+    }
+
+    .timeline {
+      position: relative;
+      margin-top: 20px;
+      padding-left: 24px;
+      border-left: 2px solid rgba(127, 208, 255, 0.35);
+      display: grid;
+      gap: 26px;
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-left: 18px;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -33px;
+      top: 4px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #7fd0ff;
+      box-shadow: 0 0 0 6px rgba(127, 208, 255, 0.14);
+    }
+
+    .timeline-item h3 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+
+    .game-icon {
+      font-size: 1.1rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .timeline-item span {
+      display: inline-block;
+      font-size: 0.88rem;
+      color: #9eb0cf;
+      margin-bottom: 8px;
+    }
+
+    .quote-box {
+      background: rgba(127, 208, 255, 0.08);
+      border: 1px solid rgba(127, 208, 255, 0.22);
+      border-radius: 20px;
+      padding: 28px;
+      max-width: 800px;
+      font-size: 1.2rem;
+      color: #f7fbff;
+    }
+
+    .trait-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 22px;
+      width: 100%;
+    }
+
+    .trait-card {
+      position: relative;
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      border: 1px solid rgba(127,208,255,0.18);
+      border-radius: 20px;
+      padding: 22px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.18);
+      overflow: hidden;
+      transition: 0.25s ease;
+    }
+
+    .trait-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(127,208,255,0.35);
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+    }
+
+    .trait-label {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+      color: #7fd0ff;
+      background: rgba(127,208,255,0.1);
+      border: 1px solid rgba(127,208,255,0.2);
+      margin-bottom: 14px;
+    }
+
+    .trait-card h3 {
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+      color: #ffffff;
+    }
+
+    .trait-card p {
+      color: #d4dbeb;
+      font-size: 0.96rem;
+      line-height: 1.7;
+    }
+
+    .memory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 22px;
+      width: 100%;
+    }
+
+    .memory-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.18);
+      transition: 0.25s ease;
+    }
+
+    .memory-card:hover {
+      transform: translateY(-6px);
+      background: rgba(255,255,255,0.08);
+    }
+
+    .memory-image {
+      height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #9eb0cf;
+      background: linear-gradient(135deg, rgba(127,208,255,0.08), rgba(255,255,255,0.03));
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 20px;
+    }
+
+    .memory-content {
+      padding: 22px;
+    }
+
+    .memory-content h3 {
+      margin-bottom: 8px;
+    }
+
+    .memory-content p {
+      color: #d4dbeb;
+      font-size: 0.96rem;
+    }
+
+    .footer {
+      padding: 30px 8% 50px;
+      text-align: center;
+      color: #9eb0cf;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      background: rgba(0,0,0,0.12);
+    }
+
+    @media (max-width: 900px) {
+      .hero-banner {
+        min-height: 64vh;
+        padding: 120px 8% 120px;
+      }
+
+      .hero-profile-card {
+        align-items: center;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 14px;
+      }
+
+      section {
+        padding-top: 110px;
+      }
+
+      .hero-banner {
+        min-height: 60vh;
+        padding: 130px 8% 110px;
+      }
+
+      .hero-profile-wrap {
+        margin-top: -70px;
+      }
+
+      .hero-profile-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 18px;
+      }
+
+      .profile-image-large {
+        width: 140px;
+        height: 140px;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  .nav-links a.active {
+      color: #7fd0ff;
+      font-weight: bold;
+    }
+
+    </style>
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo" style="font-weight:bold;font-size:1.4rem;color:#ffffff;">YT</div>
+    <nav class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#style">Playstyle</a>
+      <a href="#journey">Journey</a>
+      <a href="#memories">Memories</a>
+    </nav>
+  </header>
+
+  <section id="home" class="hero">
+    <div class="hero-banner">
+      <div class="hero-inner">
+        <div class="hero-content">
+          <!-- TEMP LOGO PLACEMENT -->
+          <div style="margin-bottom:20px;">
+            <img src="assets/images/logo.png" alt="Temp Logo" style="max-width:260px;width:100%;opacity:0.9;filter:drop-shadow(0 0 12px rgba(255,0,0,0.6));">
+          </div>
+          <div class="tag">TCG Player Portfolio</div>
+          <h1>
+            <span style="font-size:0.6em;opacity:0.85;display:block;">Hello, I'm</span>
+            <span class="highlight">Yi Tong</span>
+            <span style="display:block;font-size:0.6em;opacity:0.85;margin-top:6px;">(イートン)</span>
+          </h1>
+          <p>
+            I enjoy playing TCG a lot. I am not really someone who builds decks from scratch. Most of the time,
+            I start by copying a deck list, then I learn how the deck works, how it flows, and how to pilot it better.
+            For me, the fun comes from understanding the deck and growing through each game.
+          </p>
+          <div class="hero-buttons">
+            <a href="#journey" class="btn btn-primary">View My Journey</a>
+            <a href="#memories" class="btn btn-secondary">TCG Memories</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-profile-wrap">
+      <div class="hero-profile-card">
+        <div class="profile-image-large">
+          <img src="assets/images/6246665122264845936.png" alt="Yi Tong Profile" style="width:100%;height:100%;object-fit:cover;object-position:center;">
+        </div>
+        <div class="hero-profile-info">
+          <h2>Yi Tong / YT / イートン</h2>
+          
+          <p>Casual TCG player who enjoys learning decks through play, building memories from card pulls and events, and sharing the journey with friends.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="section-wrap">
+      <h2 class="section-title">About Me</h2>
+      <p class="section-subtitle">
+        I’m not a deck builder — I’m a deck learner. I start from existing lists, understand how they work, and improve through each game I play.
+        <br><br>
+        I enjoy TCG for the experience — the matches, the cards, and the moments that stay with me.
+      </p>
+
+      <div class="cards">
+        <div class="card">
+          <h3>Alias</h3>
+          <p>Yi Tong / YT / イートン</p>
+        </div>
+        <div class="card">
+          <h3>Playstyle</h3>
+          <p>Learn by playing, adapting through experience, and improving over time.</p>
+        </div>
+        <div class="card">
+          <h3>Current Focus</h3>
+          <div style="margin-bottom:8px; color:#9eb0cf; font-size:0.85rem; letter-spacing:1px;">MAIN</div>
+          <ul style="padding-left: 18px; color:#d4dbeb; font-size:0.96rem; line-height:1.6;">
+            <li>Gundam Card Game</li>
+            <li>Union Arena</li>
+          </ul>
+          <div style="margin-top:12px; margin-bottom:8px; color:#9eb0cf; font-size:0.85rem; letter-spacing:1px;">SIDE</div>
+          <ul style="padding-left: 18px; color:#d4dbeb; font-size:0.96rem; line-height:1.6;">
+            <li style="margin-top:8px; opacity:0.8;">One Piece Card Game</li>
+            <li style="opacity:0.8;">Weiss Schwarz</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="style">
+    <div class="section-wrap">
+      <h2 class="section-title">My Playstyle</h2>
+      <p class="section-subtitle">
+        I do not see myself as a deck builder first. I am more of a player who learns by picking up a deck list,
+        understanding its game plan, and improving through actual play.
+      </p>
+
+      <div class="trait-grid">
+        <div class="trait-card">
+          <div class="trait-label">PASSIVE</div>
+          <h3>Learn by Playing</h3>
+          <p>I usually start from an existing deck list, then slowly learn the combos, game plan, and matchup decisions through actual games.</p>
+        </div>
+
+        <div class="trait-card">
+          <div class="trait-label">TRAIT</div>
+          <h3>Adaptive Play</h3>
+          <p>As long as I understand how the deck works, I can adjust my decisions and slowly make the deck feel natural to play.</p>
+        </div>
+
+        <div class="trait-card">
+          <div class="trait-label">MEMORY</div>
+          <h3>Memory Driven</h3>
+          <p>A big part of TCG for me is not only competition, but also the memories from events, card pulls, and personal milestones.</p>
+        </div>
+
+        <div class="trait-card">
+          <div class="trait-label">CORE</div>
+          <h3>Enjoyment First</h3>
+          <p>I enjoy playing TCG a lot, and that enjoyment is what keeps me exploring more decks, more games, and more experiences.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="journey">
+    <div class="section-wrap">
+      <h2 class="section-title">My TCG Journey</h2>
+      <p class="section-subtitle">
+        My journey across different card games shaped how I learn decks, adapt to mechanics, and enjoy TCG as both a casual and growing player.
+      </p>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <h3><span class="game-icon">🎴</span>Cardfight!! Vanguard</h3>
+          <span>2010</span>
+          <p>This was where I first started playing TCG. I joined some casual events and mostly played with friends. From there, I slowly explored different card games over time, always staying as a casual player and just enjoying the experience.</p>
+        </div>
+
+        <div class="timeline-item">
+          <h3><span class="game-icon">🎴</span>Weiss Schwarz</h3>
+          <span>2013 – 2014</span>
+          <p>I started playing Weiss Schwarz and learned a different style of card game pacing, resource handling, and deck identity.</p>
+        </div>
+
+        <div class="timeline-item">
+          <h3><span class="game-icon">🎴</span>WIXOSS</h3>
+          <span>2014 – 2015</span>
+          <p>I explored WIXOSS during this period, adding more variety to my TCG experience and understanding of game mechanics.</p>
+        </div>
+
+        <div class="timeline-item">
+          <h3><span class="game-icon">🎴</span>Back to Weiss Schwarz</h3>
+          <span>2015 – 2020</span>
+          <p>I returned to Weiss Schwarz and spent several years deepening my familiarity with decks, matchups, and decision-making.</p>
+        </div>
+
+        <div class="timeline-item">
+          <h3><span class="game-icon">🎴</span>One Piece Card Game</h3>
+          <span>December 2023</span>
+          <p>I picked up One Piece Card Game and began learning a new game flow, deck structure, and matchup style.</p>
+        </div>
+
+        <div class="timeline-item">
+          <h3><span class="game-icon">🎴</span>Gundam Card Game</h3>
+          <span>2025</span>
+          <p>I started playing Gundam and it quickly became one of my current main active card games.</p>
+        </div>
+
+        <div class="timeline-item">
+          <h3><span class="game-icon">🎴</span>Union Arena</h3>
+          <span>2026</span>
+          <p>I started Union Arena and it is now one of the games I am currently most active in.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="memories">
+    <div class="section-wrap">
+      <h2 class="section-title">TCG Memories & Highlights</h2>
+      <p class="section-subtitle">
+        This section works like a memory wall. You can later replace each placeholder with your own card photo, event photo, or achievement image.
+      </p>
+
+      <div class="memory-grid">
+        <div class="memory-card">
+          <div class="memory-image">Card / Photo Placeholder<br>Highest Rarity Pull</div>
+          <div class="memory-content">
+            <h3>Opened a Highest Rarity Card</h3>
+            <p>I was shocked when I opened one of the highest rarity cards. It was one of those moments that felt too lucky to be real, and it became one of my favorite TCG memories.</p>
+          </div>
+        </div>
+
+        <div class="memory-card">
+          <div class="memory-image">Card / Event Placeholder<br>Shop Event Win</div>
+          <div class="memory-content">
+            <h3>Won a Shop Event</h3>
+            <p>Winning a shop event felt meaningful because it showed that my learning and practice were turning into real results, even as a casual player.</p>
+          </div>
+        </div>
+
+        <div class="memory-card">
+          <div class="memory-image">Event Placeholder<br>Newtype Challenge Top 8</div>
+          <div class="memory-content">
+            <h3>Top 8 at Newtype Challenge</h3>
+            <p>Reaching Top 8 was a memorable milestone for me. It gave me confidence and reminded me that every game and every bit of experience matters.</p>
+          </div>
+        </div>
+
+        <div class="memory-card">
+          <div class="memory-image" style="background: url('assets/images/newtype-win.jpeg') center/cover no-repeat;">
+          </div>
+          <div class="memory-content">
+            <h3>First Newtype Challenge Win</h3>
+            <p>Getting my first Newtype Challenge win was a special moment. It is one of the achievements I will always remember in my TCG journey.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+
+  <footer class="footer">
+    <p>© 2026 Koh Yi Tong | TCG Player Portfolio</p>
+  </footer>
+  <script>
+    const sections = document.querySelectorAll("section");
+    const navLinks = document.querySelectorAll(".nav-links a");
+
+    window.addEventListener("scroll", () => {
+      let current = "";
+
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 120;
+        const sectionHeight = section.clientHeight;
+
+        if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
+          current = section.getAttribute("id");
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove("active");
+        if (link.getAttribute("href") === `#${current}`) {
+          link.classList.add("active");
+        }
+      });
+    });
+  
+    // Disable right click
+    document.addEventListener('contextmenu', function(e) {
+      e.preventDefault();
+    });
+
+    // Disable common screenshot shortcuts (limited protection)
+    document.addEventListener('keydown', function(e) {
+      if (
+        e.key === 'PrintScreen' ||
+        (e.ctrlKey && e.key === 'p') ||
+        (e.ctrlKey && e.shiftKey && e.key === 'i') ||
+        (e.ctrlKey && e.shiftKey && e.key === 'j') ||
+        (e.ctrlKey && e.key === 'u')
+      ) {
+        e.preventDefault();
+        alert('Action disabled');
+      }
+    });
+
+    // Blur page when user tries to screenshot (very basic trick)
+    window.addEventListener('blur', () => {
+      document.body.style.filter = 'blur(8px)';
+    });
+
+    window.addEventListener('focus', () => {
+      document.body.style.filter = 'none';
+    });
+
+  </script>
+</body>
+</html>
