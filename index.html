@@ -430,14 +430,18 @@
 
     .memory-image {
       height: 220px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      color: #9eb0cf;
-      background: linear-gradient(135deg, rgba(127,208,255,0.08), rgba(255,255,255,0.03));
+      overflow: hidden;
+      padding: 0;
+      background: none;
       border-bottom: 1px solid rgba(255,255,255,0.08);
-      padding: 20px;
+    }
+
+    .memory-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 20%;
+      display: block;
     }
 
     .memory-content {
@@ -706,7 +710,10 @@
 
       <div class="memory-grid">
         <div class="memory-card">
-          <div class="memory-image">Card / Photo Placeholder<br>Highest Rarity Pull</div>
+           <div class="memory-image">
+            <img src="assets/images/hit.png" alt="Hit">
+          </div>
+
           <div class="memory-content">
             <h3>Opened a Highest Rarity Card</h3>
             <p>I was shocked when I opened one of the highest rarity cards. It was one of those moments that felt too lucky to be real, and it became one of my favorite TCG memories.</p>
@@ -714,7 +721,9 @@
         </div>
 
         <div class="memory-card">
-          <div class="memory-image">Card / Event Placeholder<br>Shop Event Win</div>
+          <div class="memory-image">
+            <img src="assets/images/Win_a_box.png" alt="Shop Event">
+          </div>
           <div class="memory-content">
             <h3>Won a Shop Event</h3>
             <p>Winning a shop event felt meaningful because it showed that my learning and practice were turning into real results, even as a casual player.</p>
@@ -722,7 +731,9 @@
         </div>
 
         <div class="memory-card">
-          <div class="memory-image">Event Placeholder<br>Newtype Challenge Top 8</div>
+          <div class="memory-image">
+            <img src="assets/images/top_8.jpg" alt="Newtype Top 8">
+          </div>
           <div class="memory-content">
             <h3>Top 8 at Newtype Challenge</h3>
             <p>Reaching Top 8 was a memorable milestone for me. It gave me confidence and reminded me that every game and every bit of experience matters.</p>
@@ -730,7 +741,8 @@
         </div>
 
         <div class="memory-card">
-          <div class="memory-image" style="background: url('assets/images/newtype-win.jpeg') center/cover no-repeat;">
+          <div class="memory-image">
+            <img src="assets/images/newtype-win.png" alt="Newtype Win">
           </div>
           <div class="memory-content">
             <h3>First Newtype Challenge Win</h3>
